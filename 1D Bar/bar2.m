@@ -1,0 +1,70 @@
+% Tapered beam hanging verticaly from a fixed point. No other force acts on
+% it except its self weight. 
+% Rectangular Cross section
+
+format long
+
+% General parameters
+non = 3; % Number of nodes 
+thickness = 0.01; % m (constant)
+width_start = 0.08; % m (width at node 1)
+width_end = 0.04; % m (width at node non)
+E = 2e11; % Pa
+total_length = 0.3;
+lengths = (total_length/(non-1))*ones(1, non-1); % m (array of element lengths)
+rho = 7800; % kg/m³
+g = 9.81; % m/s²
+
+% Interpolate widths at all nodes (linear taper)
+widths_nodes = linspace(width_start, width_end, non);
+
+% Areas at nodes
+areas_nodes = widths_nodes * thickness;
+
+% Areas for elements (average of adjacent nodes)
+num_elements = non - 1;
+area_elements = zeros(1, num_elements);
+for e = 1:num_elements
+    area_elements(e) = (areas_nodes(e) + areas_nodes(e+1)) / 2;
+end
+
+% Element stiffnesses
+k = (area_elements .* E) ./ lengths;
+
+% Global stiffness matrix assembly
+K = zeros(non);
+for e = 1:num_elements
+    local_k = k(e) * [1 -1; -1 1];
+    K(e:e+1, e:e+1) = K(e:e+1, e:e+1) + local_k;
+end
+
+% Element weights
+W = area_elements .* lengths * rho * g;
+
+% Nodal forces from self-weight (consistent load vector)
+F = zeros(non, 1);
+for e = 1:num_elements
+    F(e) = F(e) + W(e) / 2;
+    F(e+1) = F(e+1) + W(e) / 2;
+end
+
+% Boundary condition: node 1 fixed (u1 = 0)
+K_reduced = K(2:end, 2:end);
+F_reduced = F(2:end);
+U_reduced = K_reduced \ F_reduced;
+
+% Full displacements (u1 = 0)
+U = zeros(non, 1);
+U(2:end) = U_reduced;
+
+% Results: Displacements at nodes 2 to non (in mm, downward positive)
+disp("Results: Displacements at nodes 2 to end (mm)");
+for i = 2:non
+    fprintf("q%d = %.7f mm\n", i, U(i) * 1e3);
+end
+
+
+
+
+
+
