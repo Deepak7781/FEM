@@ -50,19 +50,19 @@ for e = 1:num_elements
 end
 
 
-% Boundary condition: node 1 fixed (q1 = 0)
+% Boundary condition: node 1 fixed (u1 = 0)
 K_reduced = K(2:end, 2:end);
 F_reduced = F(2:end);
-q_reduced = K_reduced \ F_reduced;
+U_reduced = K_reduced \ F_reduced;
 
-% Full displacements (q1 = 0)
-q = zeros(non, 1);
-q(2:end) = q_reduced;
+% Full displacements (u1 = 0)
+U = zeros(non, 1);
+U(2:end) = U_reduced;
 
 % Results: Displacements at nodes 2 to non (in mm, downward positive)
 disp("Results: Displacements at nodes 2 to end (mm)");
 for i = 2:non
-    fprintf("q%d = %.7f mm\n", i, q(i) * 1e3);
+    fprintf("q%d = %.7f mm\n", i, U(i) * 1e3);
 end
 
 

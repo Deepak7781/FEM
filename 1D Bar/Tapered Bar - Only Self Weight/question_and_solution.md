@@ -15,7 +15,7 @@ The bar has mass density $\rho=7800$ $kg/m^3$. Young's Modulus E = $2\times10^5 
 
 Let us first solve this problem by forming only 2 elements and let us build a Matlab program for large number of elements.
 
-Given:
+### Given
 
 $E = 2 \times 10^5$ $MN/m^2$  = $2 \times 10^5$ $N/mm^2$
 
@@ -23,9 +23,11 @@ $\text{Total Length} = 300\space mm$
 
 $\text{Mass Density},\rho = 7800 \space kg/m^3 = 7800 \times 10^{-9}\space kg/mm^3$
 
+In this problem we assume **downward forces as positive**
+
 So to form two elements we need to take three nodes.
 
-
+### Calculating Area at each node
 width at node 1 = 80 mm 
 thickness = 10 mm 
 
@@ -36,6 +38,8 @@ Area at node 3 = width at node 3 $\times$ thickness  = 40 $\times$ 10 = 400 $mm^
 Area at node 2 = $\frac{\text{Area at node 1 + Area at node 3}}{2}$ = $\frac{800+400}{2}$ = 600  $mm^2$
 
 Using the areas at each node we can calculate the cross section area of each element
+
+### Calculating Area at each element
 
 The area of cross section for Element 1
 
@@ -49,6 +53,7 @@ $$
     A_2 = \frac{\text{Area at node 2 + Area at node 3}}{2} = \frac{600+400}{2} = 500 \space mm^2
 $$
 
+### Calculating local stiffness matrix $k$
 Next step is to find the local stifness matrix $k$
 
 $$
@@ -104,6 +109,7 @@ $$
            \end{bmatrix} \times 10^5\space N/mm
 $$
 
+### Calculating the Assembled Stiffness Matrix $K$
 The next step  is to find the assembled stiffness matrix $K$
 
 To find $K$ we need to mark the elements of $k_1$ and $k_2$ according to the nodes which form the respective elements.
@@ -206,6 +212,7 @@ $$
     F_3 = \frac{\text{Body weight of element 2}}{2} = \frac{5.73885}{2} = 2.869425\space N
 $$
 
+### Calculating displacements at each node
 Analysing the given structure, we can see that one end is fixed which will not undergo any displacement. Node 1 is the node which represents the fixed end. So the displacement at node 1, $q1$ is zero. 
 
 The above condition reduces the assembled stiffness matrix K.
@@ -310,7 +317,7 @@ $$
 ## MATLAB Code
 
 The problem solely depends on the number of elements, the structure is being discritized.
-
+### Setup and Input
 ```matlab
 format long
 num_elements = 2;
@@ -319,7 +326,7 @@ non = num_elements + 1;
 In the above code we define the number of elements and using the number of elements, we calculate the number of nodes.
 
 The line 'format long' changes the default display format from short to long. The long format displays 15 digits after the decimal point for double values and 7 digits for single values.
-
+### Given parameters
 ```matlab
 thickness = 0.01; % m (constant)
 width_start = 0.08; % m (width at node 1)
@@ -336,6 +343,7 @@ Defining the given parameters in SI units.
 
 'lengths' is an array containing lengths of each element after discritization of the structure.
 
+### Calculating the Area of each element
 ```matlab
 % widths at all nodes (linear taper)
 widths_nodes = linspace(width_start, width_end, non);
@@ -357,6 +365,7 @@ We declared a row vector named area_elements using zeros() function using num_el
 
 The for loop part calculates the area of each element as already seen in the theory part. The area of element 1 is equal to area of node 1 + area of node 2 divided by 2. Same for element 2 - area of node 2 + area of node 3 divided by 2. So by observin the pattern we can write the above code.
 
+### Calculating the Assembled Stiffness Matrix K
 ```matlab
 % Element stiffnesses
 k = (area_elements .* E) ./ lengths;
@@ -380,6 +389,49 @@ Similarly if e = 2, we get K(2:3, 2:3) = K(2:3,2:3) + k(2)*[1 -1; -1 1].
 
 This code replicates the theory we have studied before. After completion of the loop we get the assembled stiffness matrix K.
 
+### Calculating Forces at each node
 ```matlab
+% Element weights
+W = area_elements .* lengths * rho * g;
 
+%Forces at each due to self-weight
+F = zeros(non, 1);
+for e = 1:num_elements
+    F(e) = F(e) + W(e) / 2;
+    F(e+1) = F(e+1) + W(e) / 2;
+end
 ```
+The above code block calculates forces at each nodes by calculating the weight of each elements. The formula used for calculating W is already shown in the theory part.
+
+There are three nodes in this example so there will be three forces. As earlier we initialize a column vector named F using the zeros() function.
+The force in first node and the last node is solely due to the first and last element. The intermediate nodes experience a force due to the element above and below it (as already seen in the theory)
+
+Going through the loop (num_elements = 2)
+- if e = 1, F(1) = F(1) + W(1)/2 and F(2) = F(2) + W(1)/2 
+- if e = 2, F(2) = F(2) + W(2)/2 and F(3) = F(3) + W(2)/2 
+
+From observing this, we can see that the second line in first iteration adds the value of weight contribution of the top element to node 2, similarly the first line in the second iteration adds the value of weight contribution of the bottom element to node 2. 
+
+## Calculating the displacements at each node
+
+```matlab
+% Boundary condition: node 1 fixed (q1 = 0)
+K_reduced = K(2:end, 2:end);
+F_reduced = F(2:end);
+q_reduced = K_reduced \ F_reduced;
+
+% Full displacements (q1 = 0)
+q = zeros(non, 1);
+q(2:end) = q_reduced;
+
+% Results: Displacements at nodes 2 to non (in mm, downward positive)
+disp("Results: Displacements at nodes 2 to end (mm)");
+for i = 2:non
+    fprintf("q%d = %.7f mm\n", i, q(i) * 1e3);
+end
+```
+As seen in the theory part, there will be no dispacement at node 1, so the assembled stiffness matrix reduces from 3x3 to a 2x2 matrix, where the first row and column are removed.
+
+Using the formula we saw in the theory part we calculate the displacements and the displacements are stored in a column vector named q.
+
+Finally we print the displacement at each nodes.
