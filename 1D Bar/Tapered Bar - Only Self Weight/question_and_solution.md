@@ -206,4 +206,104 @@ $$
     F_3 = \frac{\text{Body weight of element 2}}{2} = \frac{5.73885}{2} = 2.869425\space N
 $$
 
+Analysing the given structure, we can see that one end is fixed which will not undergo any displacement. Node 1 is the node which represents the fixed end. So the displacement at node 1, $q1$ is zero. 
+
+The above condition reduces the assembled stiffness matrix K.
+
+$$
+ K_{reduced} = \begin{bmatrix}
+       
+         16 & -6.667 \\\\
+         -6.667 & 6.667 
+     \end{bmatrix} \times 10^5 \space N/mm
+$$
+
+To find the displacement at each node,
+
+$$
+    [F] = [K][q]
+$$
+
+Here
+- $[F]$ represents the force at each node
+-  $[K]$ represents the  assembled stiffness matrix
+- $[q]$ represents the dispacements at each node
+
+$$
+    \begin{bmatrix}
+    F_1 \\\\
+    F_2 \\\\
+    F_3 
+    \end{bmatrix} 
+    = 
+    [K]
+    \begin{bmatrix}
+    q_1 \\\\
+    q_2 \\\\
+    q_3 
+    \end{bmatrix} 
+$$
+
+As discussed earlier $q1$ is 0 so the above equation reduces to
+
+$$
+    \begin{bmatrix}
+    F_2 \\\\
+    F_3 
+    \end{bmatrix} 
+    = 
+    [K_{reduced}]
+    \begin{bmatrix}
+    q_2 \\\\
+    q_3 
+    \end{bmatrix} 
+$$
+
+$$
+    
+    \begin{bmatrix}
+    6.88662 \\\\
+    2.869425
+    \end{bmatrix} 
+    = 
+    \begin{bmatrix}
+      16 & -6.667 \\\\
+     -6.667 & 6.667 
+     \end{bmatrix} \times 10^5
+    \times
+    \begin{bmatrix}
+    q_2 \\\\
+    q_3 
+    \end{bmatrix} 
+$$
+
+$$
+    \begin{bmatrix}
+    q_2 \\\\
+    q_3 
+    \end{bmatrix}
+    = 
+    \begin{bmatrix}
+     16 & -6.667 \\\\
+    -6.667 & 6.667 
+     \end{bmatrix}^{-1} \times 10^{-5}
+    \times
+    
+    \begin{bmatrix}
+    6.88662 \\\\
+    2.869425
+    \end{bmatrix} 
+$$
+
+$$
+    \begin{bmatrix}
+    q_2 \\\\
+    q_3 
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    0.1045327 \\\\
+    0.1475720 
+    \end{bmatrix} \times 10^{-4} \space mm 
+$$
 
