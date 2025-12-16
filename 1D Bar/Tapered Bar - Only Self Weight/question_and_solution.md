@@ -116,35 +116,34 @@ To find $K$ we need to mark the elements of $k_1$ and $k_2$ according to the nod
 
 - Consider the element 1, it is formed by nodes 1 and 2. So the elements in $k_1$ matrix is marked as follows:
 
-    - $$
+$$
             \begin{bmatrix}
            9.333 & -9.333 \\\\
            -9.333 & 9.333 
-           \end{bmatrix} \times 10^5 =
-
+           \end{bmatrix} \times 10^5
+       =
             \begin{bmatrix}
                 (1,1)&(1,2) \\\\
                 (2,1)&(2,2) 
             \end{bmatrix}
-      $$
+$$
 
-    - These markings correspond to the position of elements in the assembled stiffness matrix $K$
+- These markings correspond to the position of elements in the assembled stiffness matrix $K$
 
 - Next considering the element 2, it is formed by nodes 2 and 3. So the elements in $k_2$ matrix is marked as follows:
-    - $$
+  
+$$
+  \begin{bmatrix}
+  6.667 & -6.667 \\\\
+  -6.667 & 6.667
+  \end{bmatrix} =
+  \begin{bmatrix}
+  (2,2) & (2,3) \\\\
+  (3,2) & (3,3)
+  \end{bmatrix} 
+$$
 
-            \begin{bmatrix}
-           6.667 & -6.667 \\\\
-           -6.667 &  6.667 
-           \end{bmatrix} \times 10^5 =
-
-            \begin{bmatrix}
-                (2,2)&(2,3) \\\\
-                (3,2)&(3,3) \\\\
-            \end{bmatrix}
-      $$
-
-    - These markings correspond to the position of elements in the assembled stiffness matrix $K$
+- These markings correspond to the position of elements in the assembled stiffness matrix $K$
 
 The assembled stiffness matrix is calculated by placing the above elements in their respective positions.
 
@@ -217,11 +216,10 @@ Analysing the given structure, we can see that one end is fixed which will not u
 The above condition reduces the assembled stiffness matrix K.
 
 $$
- K_{reduced} = \begin{bmatrix}
-       
-         16 & -6.667 \\\\
-         -6.667 & 6.667 
-     \end{bmatrix} \times 10^5 \space N/mm
+    K_{reduced} = \begin{bmatrix}
+    16 & -6.667 \\\\
+    -6.667 & 6.667 
+    \end{bmatrix} \times 10^5 \space N/mm
 $$
 
 To find the displacement at each node,
@@ -266,7 +264,6 @@ $$
 $$
 
 $$
-    
     \begin{bmatrix}
     6.88662 \\\\
     2.869425
@@ -294,7 +291,6 @@ $$
     -6.667 & 6.667 
      \end{bmatrix}^{-1} \times 10^{-5}
     \times
-    
     \begin{bmatrix}
     6.88662 \\\\
     2.869425
