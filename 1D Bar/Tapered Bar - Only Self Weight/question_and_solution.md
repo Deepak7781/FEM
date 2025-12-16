@@ -307,3 +307,32 @@ $$
     \end{bmatrix} \times 10^{-4} \space mm 
 $$
 
+## MATLAB Code
+
+The problem solely depends on the number of elements, the structure is being discritized.
+
+```matlab
+format long
+num_elements = 2;
+non = num_elements + 1;
+```
+In the above code we define the number of elements and using the number of elements, we calculate the number of nodes.
+
+The line 'format long' changes the default display format from short to long. The long format displays 15 digits after the decimal point for double values and 7 digits for single values.
+
+```matlab
+thickness = 0.01; % m (constant)
+width_start = 0.08; % m (width at node 1)
+width_end = 0.04; % m (width at node non)
+E = 2e11; % Pa
+total_length = 0.3; % m
+lengths = (total_length/(non-1))*ones(1, non-1); % m (array of element lengths)
+rho = 7800; % kg/m^3
+g = 9.81; % m/s^2
+```
+
+Defining the given parameters in SI units.
+
+
+'lengths' is an array containing lengths of each element after discritization of the structure.
+

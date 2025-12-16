@@ -4,14 +4,15 @@
 
 format long
 
+num_elements = 2;
+non = num_elements + 1; % Number of nodes 
 
-non = 3; % Number of nodes 
 thickness = 0.01; % m (constant)
 width_start = 0.08; % m (width at node 1)
 width_end = 0.04; % m (width at node non)
 E = 2e11; % Pa
 total_length = 0.3;
-lengths = (total_length/(non-1))*ones(1, non-1); % m (array of element lengths)
+lengths = (total_length/(num_elements))*ones(1, num_elements); % m (array of element lengths)
 rho = 7800; % kg/m^3
 g = 9.81; % m/s^2
 
@@ -22,7 +23,7 @@ widths_nodes = linspace(width_start, width_end, non);
 areas_nodes = widths_nodes * thickness;
 
 % Areas for elements (average of adjacent nodes)
-num_elements = non - 1;
+
 area_elements = zeros(1, num_elements);
 for e = 1:num_elements
     area_elements(e) = (areas_nodes(e) + areas_nodes(e+1)) / 2;
