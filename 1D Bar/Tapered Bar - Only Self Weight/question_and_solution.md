@@ -336,3 +336,26 @@ Defining the given parameters in SI units.
 
 'lengths' is an array containing lengths of each element after discritization of the structure.
 
+```matlab
+% widths at all nodes (linear taper)
+widths_nodes = linspace(width_start, width_end, non);
+
+% Areas at nodes
+areas_nodes = widths_nodes * thickness;
+
+% Areas for elements (average of adjacent nodes)
+
+area_elements = zeros(1, num_elements);
+for e = 1:num_elements
+    area_elements(e) = (areas_nodes(e) + areas_nodes(e+1)) / 2;
+end
+```
+The above code block interpolates the widths at each node. As the top width and bottom width of the taper bar are given. We can use linspace() function to split them into linearly spaced elements using the num_elements variable. 
+
+Calculating the areas at each node and using them to calculate the area of each element.
+We declared a row vector named area_elements using zeros() function using num_elements. So here as num_elements = 2, area_elements = [0 0]. 
+
+The for loop part calculates the area of each element as already seen in the theory part. The area of element 1 is equal to area of node 1 + area of node 2 divided by 2. Same for element 2 - area of node 2 + area of node 3 divided by 2. So by observin the pattern we can write the above code.
+
+```matlab
+```

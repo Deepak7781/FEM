@@ -16,7 +16,7 @@ lengths = (total_length/(num_elements))*ones(1, num_elements); % m (array of ele
 rho = 7800; % kg/m^3
 g = 9.81; % m/s^2
 
-% Interpolate widths at all nodes (linear taper)
+% widths at all nodes (linear taper)
 widths_nodes = linspace(width_start, width_end, non);
 
 % Areas at nodes
