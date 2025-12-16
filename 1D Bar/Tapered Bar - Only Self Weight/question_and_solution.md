@@ -21,6 +21,7 @@ $E = 2 \times 10^5$ $MN/m^2$  = $2 \times 10^5$ $N/mm^2$
 
 $\text{Total Length} = 300\space mm$
 
+$\text{Mass Density},\rho = 7800 \space kg/m^3 = 7800 \times 10^{-9}\space kg/mm^3$
 
 So to form two elements we need to take three nodes.
 
@@ -103,3 +104,34 @@ $$
            \end{bmatrix} \times 10^5\space N/mm
 $$
 
+Now We need to calculate the forces acting at each node
+
+For that we need to find the body weight of each element.
+
+So, The body weight of element 1
+
+$$
+    W_1 = A_1L_1\rho g
+$$
+
+$$
+    W_1 = 700\times 150 \times 7800 \times 10^{-9} \times 9.81
+$$
+
+$$
+    W_1 = 8.03439\space N
+$$
+
+The body weight of element 2
+
+$$
+    W_2 = A_2L_2\rho g
+$$
+
+$$
+    W_2 = 500\times 150 \times 7800 \times 10^{-9} \times 9.81
+$$
+
+$$
+    W_2 =  5.73885\space N
+$$
