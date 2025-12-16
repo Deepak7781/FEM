@@ -117,7 +117,6 @@ To find $K$ we need to mark the elements of $k_1$ and $k_2$ according to the nod
 - Consider the element 1, it is formed by nodes 1 and 2. So the elements in $k_1$ matrix is marked as follows:
 
     - $$
-
             \begin{bmatrix}
            9.333 & -9.333 \\\\
            -9.333 & 9.333 
