@@ -36,7 +36,7 @@ k = (area_elements .* E) ./ lengths;
 K = zeros(non);
 for e = 1:num_elements
 
-    K(e:e+1, e:e+1) = K(e:e+1, e:e+1) + k(e) * [1 -1; -1 1];;
+    K(e:e+1, e:e+1) = K(e:e+1, e:e+1) + k(e) * [1 -1; -1 1];
 end
 
 % Element weights

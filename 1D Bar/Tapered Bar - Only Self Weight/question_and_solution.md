@@ -358,4 +358,28 @@ We declared a row vector named area_elements using zeros() function using num_el
 The for loop part calculates the area of each element as already seen in the theory part. The area of element 1 is equal to area of node 1 + area of node 2 divided by 2. Same for element 2 - area of node 2 + area of node 3 divided by 2. So by observin the pattern we can write the above code.
 
 ```matlab
+% Element stiffnesses
+k = (area_elements .* E) ./ lengths;
+
+% Assembled Stiffness Matrix
+K = zeros(non);
+for e = 1:num_elements
+    K(e:e+1, e:e+1) = K(e:e+1, e:e+1) + k(e) * [1 -1; -1 1];
+end
+```
+The above code block calculates the Assembled stiffness matrix.
+Let us take this case and go through the loop. (num_elements = 2)
+
+We first calculate the value of stiffness for each matrix and then multiply with the [1 -1; -1 1] matrix to get the local stiffness matrix.
+
+We initialize the assembled stiffnes matrix K using the zeros() function. Here non = 3, so we get a 3x3 matrix filled with zeros.
+
+Going though the loop, if e = 1 K(1:2, 1:2) = K(1:2, 1:2) + k(1)*[1 -1; -1 1], so the calculated value of stiffness is used here and it is added with the corresponding position in the K matrix.
+
+Similarly if e = 2, we get K(2:3, 2:3) = K(2:3,2:3) + k(2)*[1 -1; -1 1]. 
+
+This code replicates the theory we have studied before. After completion of the loop we get the assembled stiffness matrix K.
+
+```matlab
+
 ```
