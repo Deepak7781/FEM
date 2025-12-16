@@ -11,6 +11,8 @@ For a tapered bar of uniform thickness t = 10 mm as shown in figure. Find the di
 
 The bar has mass density $\rho=7800$ $kg/m^3$. Young's Modulus E = $2\times10^5 MN/m^2$. The bar is subjected to no other external force except its self weight.
 
+![problem](image.png)
+
 ## Solution
 
 Let us first solve this problem by forming only 2 elements and let us build a Matlab program for large number of elements.
