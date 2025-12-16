@@ -80,3 +80,26 @@ $$
            \end{bmatrix} \times 10^5\space N/mm
 $$
 
+$k$ for Element 2
+
+$$
+    k_2 = \frac{A_2\times E}{L_2} \times \begin{bmatrix}
+                            1 & -1  \\\\
+                            -1 & 1  \\\\
+                            \end{bmatrix}
+$$
+
+$$
+    k_2 = \frac{500\times 2 \times 10^5}{150} \times                   \begin{bmatrix}
+                            1 & -1  \\\\
+                            -1 & 1  \\\\
+                            \end{bmatrix}
+$$
+
+$$
+    k_2 = \begin{bmatrix}
+           6.667 & -6.667 \\\\
+           -6.667 &  6.667 \\\\
+           \end{bmatrix} \times 10^5\space N/mm
+$$
+
