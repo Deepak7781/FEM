@@ -17,20 +17,6 @@ g = 9.81; % Gravity in m/s^2
 A0 = 600e-6; % Area at top in m^2
 A1 = 200e-6; % Area at bottom in m^2
 
-% % Calculate the linear variation of cross-sectional area along the length
-% A = @(x) A0 + (A1 - A0) * (x / L); % Area as a function of position x
-% 
-% % Calculate the weight of the bar
-% weight = rho * g * integral(@(x) A(x), 0, L);
-% 
-% % Calculate the elongation of the bar due to its own weight
-% deltaL = (weight * L) / (A0 * E);
-% 
-% % Display the results
-% fprintf('The weight of the bar is: %.2f N\n', weight);
-% fprintf('The elongation of the bar is: %.6f m\n', deltaL);
-
-
 num_elements = 3;
 non = num_elements + 1;
 lengths = L/num_elements*ones(1, num_elements);
