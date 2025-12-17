@@ -1,5 +1,7 @@
 # Tapered Bar - Only self weight
 
+## Explanation of problem 1 - same method for all the tapered bar sums with only self weight
+
 ## Problem
 
 For a tapered bar of uniform thickness t = 10 mm as shown in figure. Find the displacement at the nodes by forming 
