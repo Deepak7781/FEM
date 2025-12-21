@@ -67,6 +67,7 @@ U_reduced = K(2:4, 2:4)\F';
 
 U = [0.6e-3; U_reduced; 0];
 
+
 sigma = zeros(num_elements,1);
 for i = 1:4
     if i < 3
