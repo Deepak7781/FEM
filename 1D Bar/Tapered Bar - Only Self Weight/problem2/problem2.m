@@ -33,7 +33,7 @@ end
 k = (areas_elements.*E)./lengths;
 
 % Calculate the global stiffness matrix
-K = zeros(non);
+K = sparse(zeros(non));
 
 for i = 1:num_elements
     K(i:i+1,i:i+1) = K(i:i+1, i:i+1) + k(i)*[1 -1; -1 1];
