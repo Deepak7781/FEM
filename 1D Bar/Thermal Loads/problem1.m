@@ -1,4 +1,4 @@
-% Given data
+% Given Problem
 
 % Increase in temperature dt = 100 C
 % AB - Brass, Area = 1200 mm^2, length = 400 mm, E = 105 GPa, CoefficienT
