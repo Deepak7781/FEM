@@ -1,7 +1,7 @@
 % Using FEM, obtain nodal displacements and slopes. The flexural rigidity
 % is ubniform throughout.
 
-% No.of nodes = 4, No.of Elements = 3
+% No.of nodes = 4, No.of Elements = 4
 
 numDOF = 2;
 numNodes = 4;
@@ -36,19 +36,16 @@ end
 F = zeros(numNodes*numDOF, 1);
 
 
-% counterclockwise - positive; clockwise - negative
-% upward - positive; downward - negative
-
-F(4) = -700; % Nm
-F(7) = -9000; % N
+F(4) = 700; % Nm
+F(7) = 9000; % N
 
 idx = true(size(K,1),1);
 idx([1 2 5]) = false;
 
 
+K_reduced = K([3 4 6 7 8], [3 4 6 7 8]);
 
-K_reduced = K(idx, idx);
-F_reduced = F(idx);
+F_reduced = F([3 4 6 7 8]);
 
 q = K_reduced\F_reduced;
 
