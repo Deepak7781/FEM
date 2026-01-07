@@ -56,5 +56,15 @@ q = zeros(numDOF*numNodes, 1);
 
 q(freeEnd) = K(freeEnd, freeEnd)\F(freeEnd);
 
-disp(q)
+disp('v2 (m) and theta2 (rad)')
+disp(q(freeEnd));
 
+% Calculation of reaction forces
+
+for i = fixedEnd
+    F(i) = K(i,freeEnd)*q(freeEnd);
+end
+
+% Display the calculated reaction forces
+disp('Reaction Forces at Fixed Ends (N):');
+disp(F(fixedEnd));
