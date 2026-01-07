@@ -1,4 +1,4 @@
-format long
+format
 
 % EI = 9000 kNm2
 % q0 = 30 kN/m
@@ -57,4 +57,3 @@ q = zeros(numDOF*numNodes, 1);
 q(freeEnd) = K(freeEnd, freeEnd)\F(freeEnd);
 
 disp(q)
-
