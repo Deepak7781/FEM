@@ -11,6 +11,7 @@ L = 6; % m
 numDOF = 2;
 numElements = 2;
 numNodes = numElements + 1;
+appliedloadLength = 3;
 
 % Calculate the length of each element
 elementLength = L / numElements;
@@ -59,12 +60,21 @@ q(freeEnd) = K(freeEnd, freeEnd)\F(freeEnd);
 disp('v2 (m) and theta2 (rad)')
 disp(q(freeEnd));
 
-% Calculation of reaction forces
+% Calculation of F
 
 for i = fixedEnd
     F(i) = K(i,freeEnd)*q(freeEnd);
 end
 
-% Display the calculated reaction forces
-disp('Reaction Forces at Fixed Ends (N):');
-disp(F(fixedEnd));
+% calculation of f
+
+f = zeros(numNodes, 1);
+m = zeros(numNodes, 1);
+
+for i = 1:numElements
+    f(i : i+1) = -q0*elementLength/2;
+    
+    m(i) = m(i) -(q0*elementLength^2)/12;
+    m(i + 1) = m(i) + (q0*elementLength^2)/12;
+end
+
