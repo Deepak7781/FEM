@@ -3,9 +3,9 @@
 % Write a matlab code to obtain the flobal stiffness matrix (display the
 % same)
 
-L = 10; % m 
-EI = 200e5; 
-N = 5; % Number of elemets
+L = input("Enter the length of the beam in m:"); % m 
+EI = input("Enter the Flexural Rigidity of the beam in Nm^2:"); 
+N = input("Enter the Number of Elements:"); % Number of elemets
 DOF = 2; % For a two node bar element.
 L_E = L/N;
 
@@ -17,6 +17,7 @@ for i = 1:N
                       -12 -6*L_E 12 -6*L_E;
                       6*L_E 2*(L_E^2) -6*L 4*(L_E^2)];
     idx = [(i*DOF - 1) (i*DOF) ((i+1)*DOF - 1) ((i+1)*DOF)];
-    disp(idx)
+    K(idx,idx) = K(idx,idx) + k;
 end
 
+disp(K)
