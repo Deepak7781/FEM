@@ -20,4 +20,4 @@ for i = 1:N
     K(idx,idx) = K(idx,idx) + k;
 end
 
-disp(K)
+disp(sparse(K))
