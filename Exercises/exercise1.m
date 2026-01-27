@@ -1,6 +1,6 @@
-% Divide a beam of length L and uniform flecural rigidity EI into N
+% Divide a beam of length L and uniform flexural rigidity EI into N
 % elements. 
-% Write a matlab code to obtain the flobal stiffness matrix (display the
+% Write a matlab code to obtain the global stiffness matrix (display the
 % same)
 
 L = input("Enter the length of the beam in m:"); % m 
