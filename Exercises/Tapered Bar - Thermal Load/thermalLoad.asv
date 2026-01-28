@@ -1,0 +1,27 @@
+% Bar is fixed both ends
+
+% Given data
+% Total Length, L = 1 m
+% Area 1 (at left) = 600 mm2
+% Area 2 (at right) = 300 mm2
+% E = 200 GPa
+% alpha = 12 x 10^-6 /C
+% delT = 50 C
+
+L = 1; % Total Length in meters
+A1 = 600e-6; % Area 1 in square meters
+A2 = 300e-6; % Area 2 in square meters
+E = 200e9; % Young's Modulus in Pascals
+alpha = 12e-6; % Coefficient of thermal expansion in 1/C
+delT = 50; % Temperature change in Celsius
+
+N = 2; % number of elements
+
+A = linspace(A1, A2, N+1);
+K = zeros(N + 1);
+Le = L/N;
+
+for i = 1:N
+    avgArea = (A(i) + A(i+1))/2;
+    ke = ((avgArea*E)/Le)*[1 -1;]
+end
