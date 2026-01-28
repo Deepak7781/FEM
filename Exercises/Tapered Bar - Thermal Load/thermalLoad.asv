@@ -15,7 +15,7 @@ E = 200e9; % Young's Modulus in Pascals
 alpha = 12e-6; % Coefficient of thermal expansion in 1/C
 delT = 50; % Temperature change in Celsius
 
-N = 10; % number of elements
+N = 2; % number of elements
 Le = L/N;
 A = linspace(A1, A2, N+1);
 K = zeros(N + 1);
@@ -51,4 +51,3 @@ R = K*u - F_thermal;
 % Stress in each element
 
 sigma = E*alpha*delT;
-
