@@ -73,7 +73,6 @@ m = zeros(numNodes, 1);
 
 for i = 1:numElements
     f(i : i+1) = -q0*elementLength/2;
-    
     m(i) = m(i) -(q0*elementLength^2)/12;
     m(i + 1) = m(i) + (q0*elementLength^2)/12;
 end
