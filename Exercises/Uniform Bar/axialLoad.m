@@ -21,7 +21,7 @@ F = zeros(N+1, 1); % Global force vector
 
 for i = 1:N
     K(i:i+1, i:i+1) = K(i:i+1, i:i+1) + ke*[1 -1; -1 1];
-    F(i:i+1) = F(i:i+1) + Fe(i); 
+    F(i:i+1) = F(i:i+1) + Fe; 
 end
 
 % Apply Boundary condition
