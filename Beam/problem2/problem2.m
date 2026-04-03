@@ -28,7 +28,7 @@ for i = 1:numElements
                     6*l 2*l^2 -6*l 4*l^2];
     disp(k)
 
-    indices = [elementConnectivity(i,1)*numDOF - 1, elementConnectivity(i,1)*numDOF elementConnectivity(i,2)*numDOF - 1, elementConnectivity(i,2)*numDOF];
+    indices = [elementConnectivity(i,1)*numDOF - 1, elementConnectivity(i,1)*numDOF, elementConnectivity(i,2)*numDOF - 1, elementConnectivity(i,2)*numDOF];
     disp(indices)
     K(indices, indices) = K(indices, indices) + k;
 end
@@ -76,4 +76,3 @@ for i = 1:numElements
     m(i) = m(i) -(q0*elementLength^2)/12;
     m(i + 1) = m(i) + (q0*elementLength^2)/12;
 end
-
