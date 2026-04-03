@@ -1,0 +1,6 @@
+N = 5;
+
+plot([6 16], [12 12], Marker=);
+axis([0 20 0 20]);
+
+xticks(linspace(6,16, N+1));
