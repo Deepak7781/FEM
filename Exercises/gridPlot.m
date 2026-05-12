@@ -6,7 +6,7 @@ y = linspace(2, 12, yN+1);
 
 [X, Y] = meshgrid(x, y);
 
-plot(X, Y, 'o', 'Color', 'r')   
+plot(X, Y, 'o', 'Color', 'g', 'MarkerFaceColor','r')   
 hold on
 
 for i = 1:size(X,1)

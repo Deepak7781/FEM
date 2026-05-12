@@ -1,9 +1,9 @@
-N = 20;
+N = 5;
 
 x = linspace(6, 16, N+1);
-y = 12 * ones(N+1);
+y = 12 * ones(N+1,1);
 
-plot(x, y, 'o-', 'Color', 'black');
+plot(x, y, 'o-', 'Color', 'white');
 hold on
 
 
